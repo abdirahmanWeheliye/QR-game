@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
+/*
+  admin password
+*/
+    'admin_password' => env('ADMIN_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------

@@ -15,7 +15,7 @@ class Setting extends Model
     public static function get(string $key, $default = null){
         return static::find($key) ?->value ?? $default;
     }
-    public function put(string $key, $value): void {
+    public static function put(string $key, $value): void {
         static::updateOrCreate(['key' => $key], ['value' => $value]);
     }
     use HasFactory;

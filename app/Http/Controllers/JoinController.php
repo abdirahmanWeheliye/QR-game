@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Student;
 class JoinController extends Controller
 {
-    public function show(Request $request){
+    public function show(Request $request)
+    {
         return view('join', ['next' => $request->query('next')]);
     }
 
@@ -23,7 +24,7 @@ class JoinController extends Controller
             );
 
         return redirect($data['next'] ?? route('progress'))
-            ->cookie('player_token', $student->play_token, 60 * 24 * 365);
+            ->cookie('play_token', $student->play_token, 60 * 24 * 365);
     }
 
 }

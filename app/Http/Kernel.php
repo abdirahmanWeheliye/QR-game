@@ -3,7 +3,9 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-
+use App\Http\Middleware\EnsureGameIsRunning;
+use App\Http\Middleware\EnsureAdmin;
+use App\Http\Middleware\IdentifyStudent;
 class Kernel extends HttpKernel
 {
     /**
@@ -64,5 +66,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'student' => \App\Http\Middleware\IdentifyStudent::class,
+        'game.running' => \App\Http\Middleware\EsnureGameIsRunning::class,
+        'admin' => \App\Http\Middleware\EnsureAdmin::class,
     ];
 }

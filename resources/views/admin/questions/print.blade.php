@@ -1,5 +1,4 @@
-<?php
-{{-- //<a href="{{ route('admin.questions.print') }}" target="_blank">Printvel met alle QR-codes</a>// --}}
+<a href="{{ route('admin.questions.print') }}" target="_blank">Printvel met alle QR-codes</a>
     <!DOCTYPE html>
 <html lang="nl">
 <head>

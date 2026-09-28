@@ -2,10 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Submission extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+
+    protected $casts = [
+        'submitted_at' => 'datetime',
+    ];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }

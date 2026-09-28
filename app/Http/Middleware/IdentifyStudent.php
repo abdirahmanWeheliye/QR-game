@@ -6,7 +6,7 @@ use App\Models\Student;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use App\Http\Middleware\EnsureGameIsRunning;
 class IdentifyStudent
 {
     /**

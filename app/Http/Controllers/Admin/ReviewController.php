@@ -13,22 +13,29 @@ class ReviewController extends Controller
         $submissions = Submission::with(['student', 'question'])
             ->where('status', 'pending')
             ->oldest('submitted_at')
-            ->paginate(20);
+            ->get();
+
         return view('admin.review.index', compact('submissions'));
     }
 
     public function update(Request $request, Submission $submission)
     {
+        $max = $submission->question->points;
+
         $data = $request->validate([
-            'points_awarded' => ['required', 'integer', 'min:0', 'max:' .$submission->question->points],
+            'decision' => ['required', 'in:correct,wrong'],
+            'points_awarded' => ['nullable', 'integer', 'min:0', 'max:'.$max],
             'feedback' => ['nullable', 'string', 'max:1000'],
-            'descision' => ['required', 'in:correct,wrong'],
         ]);
+
+        $correct = $data['decision'] === 'correct';
+
         $submission->update([
-            'status' => $data['descision'],
-            'points_awarded' => $data['descision' === 'correct' ? $data['points_awarded'] : 0],
-            'feedback' => $data['feedback'],
+            'status' => $data['decision'],
+            'points_awarded' => $correct ? ($data['points_awarded'] ?? $max) : 0,
+            'feedback' => $data['feedback'] ?? null,
         ]);
-        return back()->with('status', 'Beoordeeld');
+
+        return back()->with('status', 'Beoordeeld: '.$submission->student->student_number);
     }
 }

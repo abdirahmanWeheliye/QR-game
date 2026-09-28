@@ -58,19 +58,28 @@
 </head>
 <body>
 
-{{-- Dev-navigatiebalk: handig voor demo's, later evt. verbergen achter een omgevingscheck --}}
 <nav>
     <strong style="color:white;">QR-game</strong>
     <span class="divider">|</span>
-    <a href="{{ route('join') }}">Meedoen</a>
     <a href="{{ route('progress') }}">Voortgang</a>
     <a href="{{ route('leaderboard') }}">Leaderboard</a>
-    <span class="divider">|</span>
-    <a href="{{ route('admin.login') }}">Admin login</a>
-    <a href="{{ route('admin.questions.index') }}">Admin: vragen</a>
-    <a href="{{ route('admin.questions.print') }}">Admin: printvel</a>
-    <a href="{{ route('admin.game.show') }}">Admin: spel</a>
-   {{--<a href="{{ route('admin.review.index') }}">Admin: nakijken</a> --}}
+
+    @if (session('is_admin'))
+        <span class="divider">|</span>
+        <a href="{{ route('admin.questions.index') }}">Vragen</a>
+        <a href="{{ route('admin.questions.print') }}" target="_blank">Printvel</a>
+        <a href="{{ route('admin.review.index') }}">Nakijken</a>
+        <a href="{{ route('admin.game.show') }}">Spelbesturing</a>
+        <a href="{{ route('admin.export.download') }}">Export</a>
+
+        <form method="POST" action="{{ route('admin.logout') }}" style="margin:0 0 0 auto;">
+            @csrf
+            <button type="submit"
+                    style="background:none; border:none; color:#e5e7eb; font-size:14px; cursor:pointer; padding:0;">
+                Uitloggen
+            </button>
+        </form>
+    @endif
 </nav>
 
 <main>

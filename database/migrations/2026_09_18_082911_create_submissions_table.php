@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('question_id')->constrained()->cascadeOnDelete();
             $table->text('answer_text')->nullable();
-            $table->unsignedTinyInteger('selected_options')->nullable();
+            $table->unsignedTinyInteger('selected_option')->nullable();
             $table->string('status')->default('draft');
             $table->unsignedInteger('points_awarded')->default(0);
             $table->text('feedback')->nullable();

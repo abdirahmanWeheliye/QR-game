@@ -17,5 +17,17 @@ class Student extends Model
     public function totalPoints(): int {
         return (int) $this->submissions()->sum('points_awarded');
     }
+
+    public function getDisplayNameAttribute(): string
+    {
+        if ($this->name) {
+            return $this->name;
+        }
+
+        $nr = (string) $this->student_number;
+
+        return substr($nr, 0, 2).str_repeat('•', max(strlen($nr) - 4, 0)).substr($nr, -2);
+    }
+
     use HasFactory;
 }
